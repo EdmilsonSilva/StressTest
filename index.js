@@ -33,7 +33,7 @@ app.all("/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262", (req, res) => {
   }
   const [policyCallback] = policies.splice(indexPolicy, 1);
   res.json({
-    policyCallback,
+    policyNumber: policyCallback,
     size: policies.length
   });
   console.warn(`${FgGreen}Callback: ${callbackAmount++} - ${policyCallback} Total:${policies.length}${Reset}`);
