@@ -36,7 +36,7 @@ app.all("/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262", (req, res) => {
     policyCallback,
     size: policies.length
   });
-  console.warn(`${FgGreen}Callback: ${callbackAmount} - ${policyCallback} Total:${policies.length}${Reset}`);
+  console.warn(`${FgGreen}Callback: ${callbackAmount++} - ${policyCallback} Total:${policies.length}${Reset}`);
 });
 app.listen(port, () => {
   console.log(`EdCarrier app listening on port ${port}`);
