@@ -26,7 +26,7 @@ app.all("/policy", (req, res, next) => {
   policies.push(policyNumber);
   res.json({
     policyNumber,
-    data: "X".repeat(1043916),
+    // data: "X".repeat(1043916),
     //1048576
     size: policies.length
   });
