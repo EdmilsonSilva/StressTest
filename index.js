@@ -11,6 +11,7 @@ app.use(bodyParser.raw());
 app.use(timeout('25s'));
 
 const Reset = "\x1b[0m"
+const FgRed = "\x1b[31m"
 const FgGreen = "\x1b[32m"
 const FgYellow = "\x1b[33m"
 
@@ -36,6 +37,7 @@ app.all("/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262", (req, res) => {
   const { policyNumber } = req.body;
   const indexPolicy = policies.findIndex(v => v == policyNumber);
   if (indexPolicy == -1) {
+    console.log(`${FgRed}404 - policyNumber: ${policyNumber}${Reset}`);
     return res.sendStatus(404);
   }
   const [policyCallback] = policies.splice(indexPolicy, 1);
