@@ -1,0 +1,57 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "StressTest PHS",
+    "collectionId": "82eabec6-d8f8-46d6-842a-26451731fc86",
+    "dateExported": "2024-06-05T17:25:05.220Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "303e08d5-eb32-4209-8c64-c0a71dd3896f",
+            "colId": "82eabec6-d8f8-46d6-842a-26451731fc86",
+            "containerId": "",
+            "name": "IssuePolicy",
+            "url": "https://27500-edmilsonsilv-stresstest-qb8bn2amhkz.ws-eu114.gitpod.io/policy",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-06-05T17:00:33.956Z",
+            "modified": "2024-06-05T17:24:49.836Z",
+            "headers": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.policyNumber",
+                    "action": "setto",
+                    "value": "{{POLICYNUMBER}}"
+                }
+            ]
+        },
+        {
+            "_id": "3e4d7129-3c62-422e-919c-b97ca831c21f",
+            "colId": "82eabec6-d8f8-46d6-842a-26451731fc86",
+            "containerId": "",
+            "name": "CallbackPolicy",
+            "url": "https://27500-edmilsonsilv-stresstest-qb8bn2amhkz.ws-eu114.gitpod.io/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-05T17:00:46.326Z",
+            "modified": "2024-06-05T17:16:20.536Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"policyNumber\": \"{{POLICYNUMBER}}\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "settings": {
+        "envId": "f65c7fa9-eb57-4c10-879c-bbdc331967f5"
+    },
+    "ref": "Mvvqfi-7hVJj80L00n_M5bsw8GpstGBoOhCyoUanlQRACi5mD3d7jPxpu3iO--YIW-hGTq_Xj2VoikG9jVBDhg"
+}

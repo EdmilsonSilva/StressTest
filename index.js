@@ -8,7 +8,7 @@ const port = 27500;
 // parse application/json
 app.use(bodyParser.json())
 app.use(bodyParser.raw());
-app.use(timeout('120s'));
+app.use(timeout('600s'));
 
 const Reset = "\x1b[0m"
 const FgRed = "\x1b[31m"
@@ -23,15 +23,20 @@ app.all("/policy", (req, res, next) => {
   if (req.timedout) {
     return next();
   }
-  const policyNumber = `ED1000POLICY${nanoid()}`
-  policies.push(policyNumber);
-  res.json({
-    policyNumber,
-    // data: "X".repeat(1043916),
-    //1048576
-    size: policies.length
-  });
-  console.info(`${FgYellow}Issued: ${policyAmount++} - ${policyNumber} Total: ${policies.length}${Reset}`);
+  const policyNumber = `ED1000POLICY${nanoid()}`;
+  const interval = setInterval(() => { console.count(policyNumber) }, 1000);
+  setTimeout(() => {
+    clearInterval(interval);
+    console.countReset(policyNumber);
+    policies.push(policyNumber);
+    res.json({
+      policyNumber,
+      // data: "X".repeat(1043916),
+      //1048576
+      size: policies.length
+    });
+    console.info(`${FgYellow}Issued: ${policyAmount++} - ${policyNumber} Total: ${policies.length}${Reset}`);
+  }, 7000);
 });
 app.all("/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262", (req, res) => {
   const { policyNumber } = req.body;
@@ -40,15 +45,19 @@ app.all("/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262", (req, res) => {
     console.log(`${FgRed}404 - policyNumber: ${policyNumber}${Reset}`);
     return res.sendStatus(404);
   }
-  console.warn(`${FgGreen}Starting Callback... ${callbackAmount++} - ${policyCallback} Total:${policies.length}${Reset}`);
+  const size = policies.length;
   const [policyCallback] = policies.splice(indexPolicy, 1);
+  console.warn(`${FgGreen}Starting Callback... ${callbackAmount++} - ${policyCallback} Total:${size}${Reset}`);
+  const interval = setInterval(() => { console.count(policyCallback) }, 1000);
   setTimeout(() => {
+    clearInterval(interval);
+    console.countReset(policyCallback);
     res.json({
       policyNumber: policyCallback,
       size: policies.length
     });
     console.warn(`${FgGreen}End Callback: ${callbackAmount} - ${policyCallback} Total:${policies.length}${Reset}`);
-  }, 65000);
+  }, 18000);
 });
 app.listen(port, () => {
   console.log(`EdCarrier app listening on port ${port}`);
