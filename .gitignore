@@ -39,3 +39,4 @@ nb-configuration.xml
 .factorypath
 
 node_modules
+node_modules/
