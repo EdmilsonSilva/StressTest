@@ -28,7 +28,7 @@ app.post("/policy", (req, res, next) => {
     return next();
   }
   const random = Math.floor(Math.random() * 100) + 1;
-  const { callback_url } = req.body;
+  const { callback_url, status, street } = req.body;
   // if (attempts < 2) {
   //   attempts++;
   //   const interval1 = setInterval(() => { console.count('attempts') }, 1000);
@@ -43,7 +43,7 @@ app.post("/policy", (req, res, next) => {
   const odd = random % 2 === 1;
   if (odd) {
     setTimeout(() => {
-      res.status(200).json({});
+      res.status(200).json({status, street});
     }, 3000);
   } else {
     const policyNumber = `ED1000POLICY${nanoid()}`;
@@ -58,6 +58,8 @@ app.post("/policy", (req, res, next) => {
         callback_url,
         // data: "X".repeat(1043916),
         //1048576
+        status,
+        street,
         size: policies.length
       };
       res.status(200).json(body);
