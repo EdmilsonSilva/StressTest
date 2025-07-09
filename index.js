@@ -110,16 +110,24 @@ app.all("/callback/:processId", (req, res) => {
   setTimeout(() => {
     clearInterval(interval);
     console.countReset(processId);
-    if (body.policyNumber){
-      setTimeout(()=> {
-        fetch(`${phs}/policy/callback/${processId}`, options);
+    if (!isTest) {
+      if (body.policyNumber) {
+        setTimeout(() => {
+          fetch(`${phs}/policy/callback/${processId}`, options).catch(() => {});
+        }, delay(3000));
+      } else {
+        fetch(
+          `https://27500-edmilsonsilv-stresstest-pu1oq4oaxpr.ws-eu116.gitpod.io/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262`,
+          options
+        ).catch(() => {});
+      }
+      setTimeout(() => {
+        fetch(
+          `https://webhook.site/c74827f5-5199-48ac-b4ed-85993de1166f/${processId}`,
+          options
+        ).catch(() => {});
       }, delay(3000));
-    } else {
-     fetch(`https://27500-edmilsonsilv-stresstest-pu1oq4oaxpr.ws-eu116.gitpod.io/cb5d8aa6-c9f4-4517-87d9-3a92a2fc1262`, options);
     }
-    setTimeout(()=> {
-      fetch(`https://webhook.site/c74827f5-5199-48ac-b4ed-85993de1166f/${processId}`, options);
-    }, delay(3000));
     res.status(200).json({ status: 200, success: true, message: "" });
   }, delay(7000));
 });
