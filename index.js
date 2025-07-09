@@ -5,7 +5,7 @@ import timeout from "connect-timeout";
 
 const { POLICY_HANDLING_SERVICE: phs } = process.env;
 const app = express();
-const port = 27500;
+const port = process.env.PORT || 27500;
 // app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
