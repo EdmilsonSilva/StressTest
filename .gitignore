@@ -1,4 +1,4 @@
-#Maven
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -34,9 +34,7 @@ nb-configuration.xml
 
 # Local environment
 .env
-
--
+.local.env
 .factorypath
-
-node_modules
+# Node
 node_modules/
