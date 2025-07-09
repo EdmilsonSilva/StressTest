@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import app, { _resetPolicies } from '../index.js';
+
+// ensure test environment before loading the app
+process.env.NODE_ENV = 'test';
+const { default: app, _resetPolicies } = await import('../index.js');
 
 const startServer = () => {
   const server = app.listen(0);
@@ -10,9 +13,6 @@ const startServer = () => {
 };
 
 const headers = { 'Content-Type': 'application/json' };
-
-// ensure NODE_ENV is test for immediate responses
-process.env.NODE_ENV = 'test';
 
 // helper to fetch JSON
 const jsonFetch = async (url, options) => {
